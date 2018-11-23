@@ -35,20 +35,44 @@ const takeaways=[
 	}
 ];
 
-
 const infoDiv = document.querySelector("#info");
 const nameDiv = document.querySelector("#takeawayName");
 const descDiv = document.querySelector("#takeawayDesc");
 
 
-function initMap(){
-	myMap = L.map('map').setView([48.858271, 2.294589], 17);
+function getShowInfo(takeaway){
+	return function(evnt){
+		nameDiv.textContent=takeaway.properties.name
+		descDiv.textContent=takeaway.properties.description
+	}
+}
+
+function initMap(lat,lng){
+	myMap = L.map('map').setView([lat,lng], 14);
+
 
 	L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 	 	attribution: '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
 	    maxZoom: 18
 	 }).addTo(myMap);
 	 
+	let bounds = L.latLngBounds()
+	bounds.extend(L.latLng(lat, lng));
+	let marker = L.marker([lat,lng]).addTo(myMap);
+	marker.bindPopup("You are here").openPopup();
+
+
+	takeaways.forEach(function(takeaway){
+		console.log(takeaway.properties.name);
+		let latitude = takeaway.geometry.coordinates[0];
+		let longitude = takeaway.geometry.coordinates[1];
+		let tMarker = L.marker([latitude,longitude]).addTo(myMap);
+		tMarker.addEventListener("click",getShowInfo(takeaway),false);
+		bounds.extend(L.latLng(latitude, longitude));
+	})
+
+	myMap.fitBounds(bounds);
+
 }
 
 
@@ -58,6 +82,7 @@ function itWorks(position)
 	let longitude = position.coords.longitude;
 	console.log('latitude: '+latitude);
 	console.log('longitude: '+longitude);
+	initMap(latitude,longitude)
 }
 
 function itDoesntWork(error) 
