@@ -1,0 +1,34 @@
+[
+	{"type": "Feature",
+	  "geometry": {
+	    "type": "Point",
+	    "coordinates": [53.648559, -1.7825]
+	  },
+	  "properties": {
+	    "name": "Centros",
+	    "description":"Best doner kebab in Huddersfield."
+	  }
+	},
+	{
+	  "type": "Feature",
+	  "geometry": {
+	    "type": "Point",
+	    "coordinates": [53.647828, -1.79016]
+	  },
+	  "properties": {
+	    "name": "Trinity HFC",
+	    "description":"Good fish masala and chicken."
+	  }
+	},
+	{
+	  "type": "Feature",
+	  "geometry": {
+	    "type": "Point",
+	    "coordinates": [53.658964, -1.788794]
+	  },
+	  "properties": {
+	    "name": "Kobeda Hut",
+	    "description":"Never been but heard it's good."
+	  }
+	}
+]
