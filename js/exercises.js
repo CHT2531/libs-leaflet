@@ -88,8 +88,9 @@ function itDoesntWork(error)
 	console.log('There is an error '+error);
 }
 
-function doGeoLocation(){
-	navigator.geolocation.getCurrentPosition(itWorks, itDoesntWork);
+function getUserPosition()
+{
+    navigator.geolocation.getCurrentPosition(itWorks, itDoesntWork);
 }
 
 function init()
@@ -97,7 +98,7 @@ function init()
 	infoDiv = document.querySelector("#info");
 	nameDiv = document.querySelector("#takeawayName");
 	descDiv = document.querySelector("#takeawayDesc");
-	doGeoLocation()
+	getUserPosition()
 }
 
 
