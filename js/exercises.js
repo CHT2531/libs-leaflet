@@ -1,17 +1,43 @@
-let takeways
+//Typically this data would be loaded using Ajax
+const takeaways=[
+	{
+	  "type": "Feature",
+	  "geometry": {
+	    "type": "Point",
+	    "coordinates": [53.648559, -1.7825]
+	  },
+	  "properties": {
+	    "name": "Centros",
+	    "description":"Best doner kebab in Huddersfield."
+	  }
+	},
+	{
+	  "type": "Feature",
+	  "geometry": {
+	    "type": "Point",
+	    "coordinates": [53.647828, -1.79016]
+	  },
+	  "properties": {
+	    "name": "Trinity HFC",
+	    "description":"Good fish masala and chicken."
+	  }
+	},
+	{
+	  "type": "Feature",
+	  "geometry": {
+	    "type": "Point",
+	    "coordinates": [53.658964, -1.788794]
+	  },
+	  "properties": {
+	    "name": "Kobeda Hut",
+	    "description":"Never been but heard it's good."
+	  }
+	}
+];
 //declare variable for elements from the HTML document
 let infoDiv;
 let nameDiv;
 let descDiv;
-
-function doAjax(url,callback)
-{
-	fetch(url).then(function(response) {
-		return response.json();
-	}).then(function(json) {
-		callback(json)
-	});
-}
 
 function getShowInfo(takeaway){
 	return function(evnt){
@@ -62,18 +88,16 @@ function itDoesntWork(error)
 	console.log('There is an error '+error);
 }
 
-function doGeoLocation(data){
-	takeaways = data;
+function doGeoLocation(){
 	navigator.geolocation.getCurrentPosition(itWorks, itDoesntWork);
 }
 
 function init()
 {
 	infoDiv = document.querySelector("#info");
-
 	nameDiv = document.querySelector("#takeawayName");
 	descDiv = document.querySelector("#takeawayDesc");
-	doAjax("data/takeaways.json",doGeoLocation)
+	doGeoLocation()
 }
 
 
@@ -84,7 +108,7 @@ init()
 //3. Modify initMap so that the map is centred on the user's current location. You will need to pass the latitude and longitude as arguments to the initMap() function.
 //4. Add a marker to the map (see https://leafletjs.com/reference-1.3.4.html#marker) at the user's location.
 //5. Add a popup to the marker that says 'You are here'. The popup should appear when the page loads.
-//6. In the data folder there is a JSON file containing the location of and information about different takeaways. Using Ajax load this data and display the list of takeaways in the console. 
+//6. In the data folder there is a JSON file containing the location of and information about different takeaways. Using Ajax load this data and display the list of takeaways in the console.
 //7. Modify this so that the loop also displays the latitude of each takeaway
 //8. Modify this so that the loop  adds markers to the map showing the location of each takeaway. You might have to adjust the zoom level so you can see all the markers
 //9. Modify the loop so that you make each marker clickable. When clicked the name of the takeaway should be displayed in the console. It would probably be a good idea to use a closure to do this. Have a look at the example at the end of last week's lecture slides.
